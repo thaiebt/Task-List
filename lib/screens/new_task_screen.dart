@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:task_list/components/task_card_widget.dart';
+import 'package:task_list/data/task_dao.dart';
 import 'package:task_list/data/task_inherited.dart';
 
 class NewTaskScreen extends StatefulWidget {
@@ -139,11 +141,11 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                   ElevatedButton(
                     onPressed: (){
                       if(_formKey.currentState!.validate()) {
-                        TaskInherited.of(widget.taskContext).newTask(
-                          nameController.text, 
-                          imageController.text, 
-                          int.parse(difficultyController.text
-                        ));
+                        TaskDao().save(TaskCardWidget(
+                          taskTitle: nameController.text,
+                          dificult: int.parse(difficultyController.text), 
+                          image: imageController.text)
+                        );
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content:
                            Text("Salvando nova tarefa")

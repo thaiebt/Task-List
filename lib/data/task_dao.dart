@@ -18,7 +18,7 @@ class TaskDao {
     final Database dataBase = await getDataBase();
     var itemExists = await getTask(task.taskTitle);
     if (itemExists.isEmpty) {
-      return await dataBase.insert(_tableName, toMap(task))
+      return await dataBase.insert(_tableName, toMap(task));
     }
 
     return await dataBase.update(_tableName, toMap(task), where: "$_name = ?", whereArgs: [task.taskTitle]);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_list/data/task_dao.dart';
 import 'difficulty_widget.dart';
 
 // ignore: must_be_immutable
@@ -74,6 +75,10 @@ class _TaskCardWidgetState extends State<TaskCardWidget> {
                     height: 60,
                     width: 60,
                     child: ElevatedButton(
+                      onLongPress: () {
+                        TaskDao().delete(widget.taskTitle);
+                        setState(() {});
+                      },
                       onPressed: (){
                         setState(() {
                           if (widget.level < (widget.dificult) * 10) {
